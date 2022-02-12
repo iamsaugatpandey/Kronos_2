@@ -1,32 +1,32 @@
-let width = 800, height = 700;
+let width = (0.65) * window.innerWidth, height = (0.38) * window.innerHeight;
+let imgWidth = 0.9 * width, imgHeight = height
 
-var projection = d3.geo.mercator()
-    .scale(1500)
-    .translate([width / 2, height / 2]);
+var projection = d3.geoMercator()
+    .scale(1000)
+    .translate([width, height]);
 
-var path = d3.geo.path()
+var path = d3.geoPath()
     .projection(projection);
 
 // Set svg width & height
-var svg = d3.select('svg')
+var svg = d3.select('.map-content').append('svg')
     .attr('width', width)
     .attr('height', height);
 
+d3.json('/data/Abila_Map.geojson').then(function (mapData) {
 
-var g = svg.append('g');
 
-var mapLayer = g.append('g')
-    .classed('map-layer', true);
-
-d3.json('/data/Abila.geojson', function (error, mapData) {
-    var features = mapData.features;
-    projection.fitSize([width,height],mapData);
-    
     // Update color scale domain based on data
+    projection.fitSize([width, height], mapData)
+    path.projection(projection)
 
     // Draw each province as a path
-    mapLayer.selectAll('path')
-        .data(features)
+    svg.selectAll('path')
+        .data(mapData.features)
         .enter().append('path')
-        .attr('d', path);
+        .attr('d', path)
+        .attr('fill', 'none')
+        .attr('stroke', 'gray')
 });
+
+svg.append('image').attr('height', imgHeight).attr('width', imgWidth).attr('xlink:href', '/data/MC2-tourist.jpg')

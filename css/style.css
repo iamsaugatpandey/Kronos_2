@@ -1,0 +1,21 @@
+.analysis{
+    display: grid;
+    grid-template-columns: 65vw 33vw;
+    grid-template-rows: 60vh 38vh;
+    gap: 0px 0px;
+    grid-template-areas:
+    'map-content filters'
+    'sliders analysis_graph';
+}
+.map-content{
+    grid-area: map-content;
+}
+.filters{
+    grid-area: filters;
+}
+.sliders{
+    grid-area: sliders;
+}
+.analysis_graph{
+    grid-area: analysis_graph;
+}
