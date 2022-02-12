@@ -2,7 +2,6 @@ let width = 800, height = 700;
 
 var projection = d3.geo.mercator()
     .scale(1500)
-    // Center the Map in Colombia
     .translate([width / 2, height / 2]);
 
 var path = d3.geo.path()
