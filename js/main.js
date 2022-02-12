@@ -28,9 +28,5 @@ d3.json('/data/Abila.geojson', function (error, mapData) {
     mapLayer.selectAll('path')
         .data(features)
         .enter().append('path')
-        .attr('d', path)
-        .style("fill", "steelblue");
-
-
-    d3.selectAll('path').attr('fill', 'red')
+        .attr('d', path);
 });
