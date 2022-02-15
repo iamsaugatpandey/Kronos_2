@@ -1,5 +1,6 @@
-let width = (0.65) * window.innerWidth, height = (0.38) * window.innerHeight;
-let imgWidth = 0.9 * width, imgHeight = height
+let width = document.querySelector('.map-content').clientWidth;
+let height = document.querySelector('.map-content').clientHeight;
+let imgWidth = width, imgHeight = height
 
 var projection = d3.geoMercator()
     .scale(1000)
