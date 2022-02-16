@@ -1,0 +1,21 @@
+p {
+    border: 1px solid #000000;
+    padding: 10px
+}
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 30%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+svg {
+    background: url(../data/MC2-tourist.jpg);
+    background-size: contain
+}
