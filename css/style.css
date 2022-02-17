@@ -8,9 +8,15 @@
 }
 .POK_timemap { 
     grid-area: POK_timemap; 
+    padding-top: 5%;
+    padding-left: 5%;
 }
 .containerbox { 
     grid-area: containerbox; 
+    padding-left: 20%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-style: solid;
 }
 .infosection { 
     grid-area: infosection; 
