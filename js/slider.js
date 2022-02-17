@@ -1,103 +1,81 @@
+h = document.querySelector('.POK_timemap').clientHeight;
+w = 1.79 * h;
+min_long = 24.82386787;
+max_long = 24.91035698;
+min_lat = 36.04482337;
+max_lat = 36.09568917;
 
-var dateTime = d3.range(0, 15).map(function (d) {
-    return new Date(2014, 1, 6 + d);
+const svg = d3.select(".POK_timemap")
+    .append("svg")
+    .attr("width", w)
+    .attr("height", h)
+    .append('g')
+// const vis = frame
+//     .append("g");
+
+
+d3.json('../data/all_data.json').then(function (data) {
+    //console.log(data.Name)
+    // for (var i = 0; i < data.length; i++) {
+    //     console.log(data[i].Name);
+    // }
+    const allName = new Set(data.map(d => d.Name))
+    const allDate = new Set(data.map(d => d.Date))
+    console.log(allName)
+    d3.select('.selectButton')
+        .selectAll('myOptions')
+        .data(allName).enter().append('option').text(function (d) { return d; }).attr('value', function (d) { return d; })
+
+
+    d3.select('.selectDate')
+        .selectAll('myOptions')
+        .data(allDate).enter().append('option').text(function (d) { return d; }).attr('value', function (d) { return d; })
+
+    //Color Scale for different names
+    const myColor = d3.scaleOrdinal().domain(allName).range(d3.schemeSet2)
+
+    const circles = svg
+        .selectAll("circle")
+        .data(data.filter(function (d) {
+            return d.Name == 'Lucas Alcazar' && d.Date == '2014-01-06'
+        }))
+        .enter()
+        .append("circle")
+        .attr("r", 4)
+        .style("stroke", "black")
+        .style("stroke-width", 1)
+        .attr("cy", function (d) {
+            return (((max_lat - d.Lat) / (max_lat - min_lat)) * h);
+        })
+        .attr("cx", function (d) {
+            return (((d.Long - min_long) / (max_long - min_long)) * w);
+        })
+        .style("fill", function (d) {
+            return myColor('valueA')
+        });
+
+    //function to update the group
+    function update(selectOption, selectOption2) {
+        const filter_data = data.filter(function (d) {
+            return d.Name == selectOption && d.Date == selectOption2
+        })
+        circles.data(filter_data).transition().duration(800)
+            .attr("cy", function (d) {
+                return (((max_lat - d.Lat) / (max_lat - min_lat)) * h);
+            })
+            .attr("cx", function (d) {
+                return (((d.Long - min_long) / (max_long - min_long)) * w);
+            })
+            .style('fill', function (d) {
+                return myColor(selectOption)
+            });
+    }
+    d3.select('.selectButton').on('change', function (event, d) {
+        const selectedGroup = d3.select(this).property('value')
+        // update(selectedGroup);
+        d3.select('.selectDate').on('change', function (event, d) {
+            const selectedDate = d3.select(this).property('value')
+            update(selectedGroup, selectedDate)
+        })
+    })
 })
-var slideTime = d3
-    .sliderBottom()
-    .min(d3.min(dateTime))
-    .max(d3.max(dateTime))
-    .step(1000 * 60 * 60 * 24)
-    .width((document.querySelector('.sliders').clientWidth) - (document.querySelector('.sliders').clientWidth) / 2)
-    .tickFormat(d3.timeFormat('%m/%d'))
-    .tickValues(dateTime)
-    .default(new Date(2014, 1, 13))
-    .on('onchange', val => {
-        d3.select('#value-date').text(d3.timeFormat('%m/%d')(val));
-    });
-
-var gTime = d3.select('.slide-date').append('svg')
-    .attr('width', (document.querySelector('.sliders').clientWidth))
-    .attr('height', (document.querySelector('.sliders').clientHeight) / 3).append('g').attr('transform', 'translate(30,30)');
-gTime.call(slideTime);
-d3.select('#value-date').text(d3.timeFormat('%m/%d')(slideTime.value()))
-
-var dTime = d3.range(0, 25).map(function (t) {
-    return new Date(2014, 1, 6) + t * 60 * 60 * 1000;
-})
-
-var slideTime = d3
-    .sliderBottom()
-    .min(d3.min(dTime))
-    .max(d3.max(dTime))
-    .step(1000 * 60 * 60)
-    .width((document.querySelector('.sliders').clientWidth) - (document.querySelector('.sliders').clientWidth) / 2)
-    .tickFormat(d3.timeFormat('%h:%M'))
-    .tickValues(dTime)
-    .default(new Date(2014, 1, 13))
-    .on('onchange', val => {
-        d3.select('#value-time').text(d3.timeFormat('%h:%M')(val));
-    });
-
-var gTime = d3.select('.slide-time').append('svg')
-    .attr('width', (document.querySelector('.sliders').clientWidth))
-    .attr('height', (document.querySelector('.sliders').clientHeight) / 3).append('g').attr('transform', 'translate(30,30)');
-gTime.call(slideTime);
-d3.select('#value-time').text(d3.timeFormat('%h:%M')(slideTime.value()))
-
-// // Date
-// var dataTime = d3.range(0, 15).map(function (d) {
-//     return new Date(2014, 1, 6 + d);
-// });
-// var sliderTime = d3
-//     .sliderBottom()
-//     .min(d3.min(dataTime))
-//     .max(d3.max(dataTime))
-//     .step(1000 * 60 * 60 * 24)
-//     .width(300)
-//     .tickFormat(d3.timeFormat('%M%D'))
-//     .tickValues(dataTime)
-//     .default(new Date(2014, 1, 13))
-//     .on('onchange', val => {
-//         d3.select('#value-date').text(d3.timeFormat('%M%D')(val));
-//     });
-
-// var gTime = d3
-//     .select('#sliders-date')
-//     .append('svg')
-//     .attr('width', 500)
-//     .attr('height', 100)
-//     .append('g')
-//     .attr('transform', 'translate(30,30)');
-
-// gTime.call(sliderTime);
-
-// d3.select('#value-date').text(d3.timeFormat('%M%D')(sliderTime.value()));
-
-// // Time
-// var dTime = d3.range(0, 25).map(function (t) {
-//     return new Date(2014, 1, 6) + t * 60 * 60 * 1000;
-// });
-// var slidTime = d3
-//     .sliderBottom()
-//     .min(d3.min(dTime))
-//     .max(d3.max(dTime))
-//     .step(1000 * 60 * 60)
-//     .width(300)
-//     .tickFormat(d3.timeFormat('%HH%MM'))
-//     .tickValues(dTime)
-//     .default(new Date(2014, 1, 13))
-//     .on('onchange', val => {
-//         d3.select('#value-time').text(d3.timeFormat('%HH:%MM')(val));
-//     });
-
-// var gT = d3
-//     .select('#slider-time')
-//     .append('svg')
-//     .attr('width', 500)
-//     .attr('height', 100)
-//     .append('g')
-//     .attr('transform', 'translate(30,30)');
-
-// gT.call(slidTime);
-
-// d3.select('#value-time').text(d3.timeFormat('%HH:%MM')(slidTime.value()));

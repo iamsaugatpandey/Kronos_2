@@ -1,21 +1,21 @@
-.analysis{
+.container{
     display: grid;
-    grid-template-columns: 65vw 33vw;
-    grid-template-rows: 60vh 38vh;
-    gap: 0px 0px;
-    grid-template-areas:
-    'map-content filters'
-    'sliders analysis_graph';
+    grid-template-columns: 75vw 25vw;
+    grid-template-rows: 60vh 40vh;
+    grid-template-areas: 
+    'POK_timemap containerbox'
+    'infosection infosection';
 }
-.map-content{
-    grid-area: map-content;
+.POK_timemap { 
+    grid-area: POK_timemap; 
 }
-.filters{
-    grid-area: filters;
+.containerbox { 
+    grid-area: containerbox; 
 }
-.sliders{
-    grid-area: sliders;
+.infosection { 
+    grid-area: infosection; 
 }
-.analysis_graph{
-    grid-area: analysis_graph;
+svg{
+    background: url(../data/MC2-tourist.jpg);
+    background-size: contain
 }

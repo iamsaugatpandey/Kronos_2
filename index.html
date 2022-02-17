@@ -1,54 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Assignment 2</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div class="analysis">
-        <div class="map-content">
+    <div class="container">
+        <div class="POK_timemap"></div>
+        <div class="containerbox">
+            <p>Name: </p>
+            <select class="selectButton"></select>
+            <br />
+            <p>Select the Date: </p>
+            <select class='selectDate'></select>
         </div>
-        <div class=" filters">
-            <input type="checkbox" class="checkbox" value="A"> Credit Card
-            <input type='checkbox' class="checkbox" value="B">Loyalty Card
-        </div>
-        <div class="sliders">
-            <h2 class="date">Date</h2>
-            <div class="date-slider">
-                <div class="dateslide">
-                    <p id="value-date"></p>
-                </div>
-                <div class="slide-date"></div>
-            </div>
-            <h2 class="time">Time</h2>
-            <div class="time-slider">
-                <div class="timeslide">
-                    <p id="value-time"></p>
-                </div>
-                <div class="slide-time"></div>
-            </div>
-        </div>
-        <!-- <h2>Date</h2>
-            <div class="row align-items-center">
-                <div class="col-sm-2"><p id="value-date"></p></div>
-                <div class="col-sm"><div id="slider-date"></div></div>
-            </div>
-            <h2>Time</h2>
-            <div class="row align-items-center">
-                <div class="col-sm-2"><p id="value-time"></p></div>
-                <div class="col-sm"><div id="slider-time"></div></div>
-            </div> -->
-        <div class="graph"></div>
+        <div class="infosection"></div>
     </div>
+    <script src="js/d3.min.v6.js"></script>
+    <script src="js/main.js"></script>
 </body>
-<script src="/js/d3.min.v6.js"></script>
-<script src="/js/topojson.min.js"></script>
-<script src="https://unpkg.com/d3-simple-slider"></script>
-<script type="application/javascript" src="/js/main.js"></script>
-<script type="application/javascript" src="/js/slider.js"></script>
-</head>
-</head>
 
 </html>
