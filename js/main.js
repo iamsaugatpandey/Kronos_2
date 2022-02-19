@@ -1,4 +1,4 @@
-h = document.querySelector('.POK_timemap').clientHeight;
+h = (document.querySelector('.POK_timemap').clientHeight) / 2 + (document.querySelector('.POK_timemap').clientHeight) / 1.8;
 w = 1.79 * h;
 min_long = 24.82386787;
 max_long = 24.91035698;
@@ -10,8 +10,6 @@ const svg = d3.select(".POK_timemap")
     .attr("width", w)
     .attr("height", h)
     .append('g')
-// const vis = frame
-//     .append("g");
 
 
 d3.json('data/all_data.json').then(function (data) {
@@ -157,7 +155,7 @@ d3.json('data/all_data.json').then(function (data) {
                     console.log("The second index is", indexCalc2)
                     const new_Data = filter_2.slice(indexCalc, indexCalc2 + 1)
                     console.log(new_Data)
-                    if (indexCalc < 0 || indexCalc2 < 0 || (indexCalc2 - indexCalc) < 0) {
+                    if (indexCalc < 0 || indexCalc2 <= 0 || (indexCalc2 - indexCalc) < 0) {
                         alert("Please select valid input! Referesh the page to use it again")
                     }
                     update(new_Data, selectedGroup)

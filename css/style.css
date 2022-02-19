@@ -8,13 +8,10 @@
 }
 .POK_timemap { 
     grid-area: POK_timemap; 
-    padding-top: 5%;
-    padding-left: 5%;
 }
 .containerbox { 
     grid-area: containerbox; 
-    padding-left: 20%;
-    margin-left: 10%;
+    padding-left: 5%;
     margin-right: 10%;
     border-style: solid;
 }
@@ -24,4 +21,7 @@
 svg{
     background: url(../data/MC2-tourist.jpg);
     background-size: contain
+}
+.info_1{
+    text-align: left;
 }
