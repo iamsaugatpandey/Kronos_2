@@ -14,7 +14,7 @@ const svg = d3.select(".POK_timemap")
 //     .append("g");
 
 
-d3.json('/data/all_data.json').then(function (data) {
+d3.json('data/all_data.json').then(function (data) {
 
     const allName = new Set(data.map(function (d) {
         return d.Name
