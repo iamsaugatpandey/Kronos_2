@@ -14,7 +14,7 @@ const svg = d3.select(".POK_timemap")
 //     .append("g");
 
 
-d3.json('../data/all_data.json').then(function (data) {
+d3.json('/data/all_data.json').then(function (data) {
 
     const allName = new Set(data.map(function (d) {
         return d.Name
@@ -43,7 +43,7 @@ d3.json('../data/all_data.json').then(function (data) {
 
     const mousemove = function (event, d) {
         tooltip
-            .html(`Time: ${d.Name}`)
+            .html(d.Time + "<br/>" + d.Name)
             .style("left", (event.x) / 2 + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
             .style("top", (event.y) / 2 + "px")
     }
@@ -60,7 +60,7 @@ d3.json('../data/all_data.json').then(function (data) {
     //Color Scale for different names
     const myColor = d3.scaleOrdinal().domain(allName).range(d3.schemeSet2)
 
-    d3.selectAll('circles').remove();
+
     const circles = svg
         .selectAll("circle")
         .data(data.filter(function (d) {
@@ -116,12 +116,13 @@ d3.json('../data/all_data.json').then(function (data) {
 
         dots.transition()
             .duration(1000)
-            .delay(function (d, i) { return i * (1000 / 4); })
             .style('opacity', 1);
 
         dots.on("mouseover", mouseover)
             .on("mousemove", mousemove)
             .on("mouseleave", mouseleave);
+
+        dots.exit().remove();
     }
     d3.select('.selectButton').on('change', function (event, d) {
         const selectedGroup = d3.select(this).property('value')
@@ -156,6 +157,9 @@ d3.json('../data/all_data.json').then(function (data) {
                     console.log("The second index is", indexCalc2)
                     const new_Data = filter_2.slice(indexCalc, indexCalc2 + 1)
                     console.log(new_Data)
+                    if (indexCalc < 0 || indexCalc2 < 0 || (indexCalc2 - indexCalc) < 0) {
+                        alert("Please select valid input! Referesh the page to use it again")
+                    }
                     update(new_Data, selectedGroup)
                     //getRangeTime(selectedGroup, selectedDate, selectedTime1, selectedTime2)
                     //console.log(getRangeTime(selectedGroup, selectedDate, selectedTime1, selectedTime2))
