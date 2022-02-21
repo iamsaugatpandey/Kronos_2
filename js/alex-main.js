@@ -14,13 +14,30 @@ const vis = frame
 
 let day = "6";
 
+const namesVis = d3.select('#NameFiltering').append("g");
+
 const getCompareString = function (num) {
     if (num < 10)
         return '2014-01-0' + num;
     else
         return '2014-01-' + num;
 }
-// TODO: make function that takes a number (6) and turns it into a string to compare Dates to (2014-01-06)
+
+d3.json("../data/name_data.json").then(function(data) {
+    const nameChecks = namesVis
+        .selectAll("div")
+        .data(data)
+        .enter().append("div")
+    nameChecks.append("input")
+        .attr("type", "checkbox")
+        .attr("id", function(d){return d.Name;})
+    nameChecks.append("p").text(function(d) {return d.Name;});
+    const allName = new Set(data.map(function (d) {
+        return d.Name
+    }))
+    const myColor = d3.scaleOrdinal().domain(allName).range(d3.schemeSet2)
+
+})
 
 
 d3.json("../data/all_data.json").then(function (data) {
@@ -46,6 +63,10 @@ d3.json("../data/all_data.json").then(function (data) {
                     return "hidden"
             });
     });
+
+    const allName = new Set(data.map(function (d) {
+        return d.Name
+    }))
 
     // the circles
     const circles = vis
