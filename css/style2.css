@@ -1,0 +1,27 @@
+.container{
+    display: grid;
+    grid-template-columns: 75vw 25vw;
+    grid-template-rows: 60vh 40vh;
+    grid-template-areas: 
+    'POK_timemap containerbox'
+    'infosection infosection';
+}
+.POK_timemap { 
+    grid-area: POK_timemap; 
+}
+.containerbox { 
+    grid-area: containerbox; 
+    padding-left: 5%;
+    margin-right: 10%;
+    border-style: solid;
+}
+.infosection { 
+    grid-area: infosection; 
+}
+svg{
+    background: url(../data/MC2-tourist.jpg);
+    background-size: contain
+}
+.info_1{
+    text-align: left;
+}

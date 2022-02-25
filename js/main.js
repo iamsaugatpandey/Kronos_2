@@ -101,7 +101,8 @@ d3.json('data/all_data.json').then(function (data) {
 
     //function to update the group
     function update(typeData, selectOption) {
-        var dots = circles.data(typeData)
+        var dots = circles
+            .data(typeData)
             .attr("cy", function (d) {
                 return (((max_lat - d.Lat) / (max_lat - min_lat)) * h);
             })
