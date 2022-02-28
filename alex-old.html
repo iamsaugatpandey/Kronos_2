@@ -8,8 +8,13 @@
 </head>
 
 <body>
-    <hr>
-    <div>
+
+    <h3> Please run from webstorm to see visualization</h3>
+    <h4>Change the year to see how POK grows; hover over highlighted circles to see more information</h4>
+    <section width="75%">
+        <h3 id="timeline_info"></h3>
+    </section>
+    <div class="container">
         <form>
             <label class="radio-inline">
                 <input type="radio" name="day" value="6" checked>January 6
@@ -55,46 +60,40 @@
             </label>
         </form>
     </div>
-    <hr>
     <div class="container">
         <div class="POK_timemap"></div>
         <div class="containerbox">
-            <hr>
             <form>
                 <label>
-                    <input type="checkbox" name="group" value="suspects" class="input-checkbox"> Suspicious People (from assignment 1)
-                </label><br><br>
+                    <input type="checkbox" name="group" value="suspects"> Suspicious People (from assignment 1)
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="admins" class="input-checkbox"> Administrative Staff
-                </label><br><br>
+                    <input type="checkbox" name="group" value="admins"> Administrative Staff
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="engineers" class="input-checkbox"> Engineers
-                </label><br><br>
+                    <input type="checkbox" name="group" value="engineers"> Engineers
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="execs" class="input-checkbox"> Executives
-                </label><br><br>
+                    <input type="checkbox" name="group" value="execs"> Executives
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="facilities" class="input-checkbox"> Facilities Staff
-                </label><br><br>
+                    <input type="checkbox" name="group" value="facilities"> Facilities Staff
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="itStaff" class="input-checkbox"> IT Team
-                </label><br><br>
+                    <input type="checkbox" name="group" value="itStaff"> IT Team
+                </label>
                 <label>
-                    <input type="checkbox" name="group" value="security" class="input-checkbox"> Security
-                </label><br><br>
-                <label>
-                    See movements for one hour, ending at the selected time. <br>
-                    Eg: Selecting "14" shows movements from 1 PM to 2 PM <br>
-                    <input type="number" name="time" min="1" step="1" max="24" value="13">
+                    <input type="checkbox" name="group" value="security"> Security
                 </label>
             </form>
-            <div class="name_legend"></div>
         </div>
-        <div class="infosection"></div>
     </div>
     <script src="js/d3.min.v6.js"></script>
-    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
     <script src="js/alex-main.js"></script>
+    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
+
+
+
 </body>
 
 </html>
