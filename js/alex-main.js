@@ -11,7 +11,7 @@ const administration = ["Mat Bramar", "Anda Ribera", "Rachel Pantanal", "Linda L
 const engineering = ["Marin Onda", "Isande Borrasca", "Axel Calzas", "Kare Orilla", "Elsa Orilla",
                         "Brand Tempesta", "Lars Azada", "Felix Balas", "Lidelse Dedos", "Birgitta Frente",
                         "Adra Nubarron", "Gustav Cazar", "Vira Frente"];
-const executives = ["Orham Strum", "Ada Campo-Corrente", "Ingrid Barranco", "Sten Sanjorge Jr.", "Willem Vasco-Pais"];
+const executives = ["Orhan Strum", "Ada Campo-Corrente", "Ingrid Barranco", "Sten Sanjorge Jr.", "Willem Vasco-Pais"];
 const facilities = ["Bertrand Ovan", "Emile Arpa", "Varro Awelon", "Dante Coginian", "Albina Hafon",
                         "Benito Hawelon", "Claudio Hawelon", "Henk Mies", "Valeria Morlun", "Adan Morlun",
                         "Cecilia Morluniau", "Irene Nant", "Dylan Scozzese"];
@@ -19,7 +19,7 @@ const infotech = ["Linnea Bergen", "Lucas Alcazar", "Isak Baza", "Nils Calixto",
 const security = ["Kanon Herrero", "Varja Lagos", "Stenig Fusil", "Minke Mies", "Hennie Osvaldo",
                     "Isia Vann", "Edvard Vann", "Felix Resumir", "Loreto Bodrogi", "Hideki Cocinaro", "Inga Ferro"];
 
-let suspects_selected = false;
+let suspects_selected = true;
 let admin_selected = false;
 let engineers_selected = false;
 let execs_selected = false;
@@ -29,6 +29,7 @@ let security_selected = false;
 
 let day = "6";
 let time = "13";
+let group = 'suspects';
 
 const getDateCompareString = function (num) {
     if (num < 10)
@@ -116,6 +117,7 @@ d3.json('data/all_data.json').then(function (data) {
                         (facilities_selected && facilities.includes(d.Name)) ||
                         (it_selected && infotech.includes(d.Name)) ||
                         (security_selected && security.includes(d.Name))) {
+                        console.log(d.Name + " has the color " + myColor(d.Name));
                         return "visible";
                     } else {
                         return "hidden";
@@ -126,7 +128,10 @@ d3.json('data/all_data.json').then(function (data) {
             })
             .style("opacity", function(d){
                 return getOpacityFromTime(d.Time);
-            });
+            })
+            .style("fill", function (d) {
+                return myColor(d.Name);
+        });
     }
     // d3.select('.selectButton')
     //     .selectAll('myOptions')
@@ -145,13 +150,14 @@ d3.json('data/all_data.json').then(function (data) {
 
 
     d3.selectAll("input[name='group']").on("change", function () {
-        if(this.value === 'suspects'){suspects_selected = !suspects_selected;}
-        if(this.value === 'admins'){admin_selected = !admin_selected;}
-        if(this.value === 'engineers'){engineers_selected = !engineers_selected;}
-        if(this.value === 'execs'){execs_selected = !execs_selected;}
-        if(this.value === 'facilities'){facilities_selected = !facilities_selected;}
-        if(this.value === 'itStaff'){it_selected = !it_selected;}
-        if(this.value === 'security'){security_selected = !security_selected;}
+        group = this.value;
+        if(this.value === 'suspects'){suspects_selected = true; reset_color(suspects);}else{suspects_selected = false;}
+        if(this.value === 'admins'){admin_selected = true; reset_color(administration);}else{admin_selected = false;}
+        if(this.value === 'engineers'){engineers_selected = true; reset_color(engineering);}else{engineers_selected = false;}
+        if(this.value === 'execs'){execs_selected = true; reset_color(executives);}else{execs_selected = false;}
+        if(this.value === 'facilities'){facilities_selected = true; reset_color(facilities);}else{facilities_selected = false;}
+        if(this.value === 'itStaff'){it_selected = true; reset_color(infotech);}else{it_selected = false;}
+        if(this.value === 'security'){security_selected = true; reset_color(security);}else{security_selected = false;}
         refreshCircles();
     })
     //creating a tooltip
@@ -187,7 +193,12 @@ d3.json('data/all_data.json').then(function (data) {
 
 
     // Color Scale for different names
-    const myColor = d3.scaleOrdinal().domain(allName).range(d3.schemeSet2)
+    let myColor = d3.scaleOrdinal().domain(suspects).range(d3.schemeSet2)
+
+    const reset_color = function (names) {
+        console.log(names);
+        myColor = d3.scaleOrdinal().domain(names).range(d3.schemeSet2);
+    }
 
 
     const circles = vis
@@ -201,7 +212,13 @@ d3.json('data/all_data.json').then(function (data) {
         })
         .style("stroke", "black")
         .style("stroke-width", 2)
-        .attr("visibility", "hidden")
+        .attr("visibility", function(d){
+            if(suspects.includes(d.Name) && d.Date === getDateCompareString(day) && isInTimeFrame(d.Time)){
+                return "visible";
+            }else {
+                return "hidden";
+            }
+        })
         .attr("cy", function (d) {
             return (((max_lat - d.Lat) / (max_lat - min_lat)) * h);
         })
