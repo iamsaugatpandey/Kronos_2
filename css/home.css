@@ -1,0 +1,56 @@
+body{
+    background-image: url('/data/Background.png');
+}
+.head{
+    margin-top: 20px;
+    text-align:center;
+}
+
+#navbar{
+    background-color: #145152;
+    height: 40px;
+}
+
+.navbtn{
+    color: white;
+    text-align: right;
+    line-height: 100%;
+    border-left: 2px solid white;
+    cursor: pointer;
+}
+
+.navbtn:hover{
+    text-decoration: underline;
+}
+
+.nav-selected{
+    background-color: #092626;
+}
+#navbar a{
+    color: white;
+}
+.fil_head{
+    margin-top: 5%;
+    text-align: center;
+    font-size: xx-large;
+}
+.filter_rule{
+    border:1px solid black;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+.d1, .d2, .tools_used{
+    padding-top: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-size: x-large;
+}
+.d3{
+    height: 50px;
+    width: 50px;
+}
+.py{
+    height: 50px;
+    width: 200px;
+}

@@ -2,37 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="bootstrap-4.4.1-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 </head>
 
 <body>
-    <div class="container">
-        <div class="POK_timemap"></div>
-        <div class="containerbox">
-            <p>Name: </p>
-            <select class="selectButton"></select>
-            <br />
-            <p>Select the Date: </p>
-            <select class='selectDate'></select>
-            <br />
-            <p>Select the Time (From): </p>
-            <select class='selectTime1'></select>
-            <br />
-            <p>Select the Time (To): </p>
-            <select class='selectTime2'></select>
-            <br />
-            <br />
-            <p class="info_1">The default dots presents positions of Lucas Alcazar on 2014-01-06.</p>
-            <br />
-            <p class="info_2">Note: Select each dropdown in the order given above, starting from Name. </p>
-        </div>
-        <div class="infosection"></div>
+    <h1 class="head">Assignment - 2</h1>
+    <div id="navbar" class="row">
+        <div class="col-7"></div>
+        <div class="col-1 navbtn nav-selected">Home</div>
+        <div class="col-1 navbtn" onclick="location.href='alex.html';">Filter 1</div>
+        <div class="col-1 navbtn" onclick="location.href='index2.html';">Filter 2</div>
+        <div class="col-1 navbtn" onclick="location.href='contact.html';">Contact</div>
+        <div class="col-1 navbtn"><a href="youtube.com">Video</a></div>
     </div>
-    <script src="js/d3.min.v6.js"></script>
-    <script src='https://cdn.jsdelivr.net/lodash/4.17.2/lodash.min.js'></script>
-    <script src="js/main.js"></script>
+    <div class="descrp">
+        <div class="filter_rule">
+            <h4 class="fil_head">Filters used in this assignment:</h4>
+            <p class="d1">
+                <b>Filter 1:</b> This page includes two different analysis methods. In the
+                first method, we are using a filter box to filter locations on the map based on the
+                departments
+                and dates. We also included a tooltip which shows time and the employee name when hovering on the
+                dots.
+                For the second method, we are using hilter curves to describe the closeness of
+                different employees at different times in a single chart.
+            </p>
+            <p class="d2">
+                <b>Filter 2:</b> For this page, we are only using one filter method. In this method, we have a
+                filter
+                box which
+                filters based on the employee, dates, and given time range. It also includes a tooltip option when
+                hovering over the dots on the map.
+            </p>
+            <p class="tools_used"><b>Tools Used:</b> <img class="d3" src="/data/d3.js logo.png"> <img class="py"
+                    src="/data/python_logo.png">
+            </p>
+        </div>
+    </div>
 </body>
 
 </html>
