@@ -1,5 +1,5 @@
 body{
-    background-image: url('/data/Background.png');
+    background-image: url('data/Background.png');
 }
 .head{
     margin-top: 20px;
