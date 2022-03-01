@@ -29,3 +29,6 @@ form {
     display: flex;
     flex-flow: column;
 }
+img{
+    height: 80%;
+}
